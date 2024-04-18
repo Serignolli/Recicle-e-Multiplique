@@ -8,6 +8,7 @@ public class ReciclemultipliqueApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReciclemultipliqueApplication.class, args);
+		System.out.print("Servidor subindo!");
 	}
 
 }
