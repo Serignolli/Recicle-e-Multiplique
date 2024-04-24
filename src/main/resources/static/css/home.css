@@ -1,0 +1,44 @@
+        /* Estilos CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #388E3C;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #4CAF50;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
