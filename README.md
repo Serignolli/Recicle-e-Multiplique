@@ -15,7 +15,14 @@ Este repositório contém o código-fonte de uma aplicação web desenvolvida co
 
 ## 🔧 Tecnologias Utilizadas
 
+- Spring
 - Spring Boot
+- Hibernate
+- HTML
+- CSS
+- Javascript
+- Thymeleaf
+- H2 Database
 
 ## 🤝 Contribuição
 
