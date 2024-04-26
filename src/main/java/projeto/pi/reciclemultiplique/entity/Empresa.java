@@ -2,6 +2,8 @@ package projeto.pi.reciclemultiplique.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,8 +17,9 @@ public class Empresa extends AbstractEntity<Long> {
 	@Column(name = "cnpj", nullable = false, unique = true, length = 14)
 	private Integer cnpj;
 	
-	@Column(name = "endereco", nullable = false, length =255)
-	private String endereco;
+	@OneToOne
+	@JoinColumn(name = "endereco_id_fk")
+	private Endereco endereco;
 	
 	@Column(name = "email", nullable = false, unique = true, length = 100)
 	private String email;
@@ -40,11 +43,11 @@ public class Empresa extends AbstractEntity<Long> {
 		this.cnpj = cnpj;
 	}
 
-	public String getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(String endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 
