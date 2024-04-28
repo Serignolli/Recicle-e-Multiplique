@@ -4,7 +4,7 @@ import java.util.List;
 
 import projeto.pi.reciclemultiplique.entity.Usuario;
 
-public class UsuarioDao {
+public interface UsuarioDao {
 
     void save(Usuario usuario);
 
