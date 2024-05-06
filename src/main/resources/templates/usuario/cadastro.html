@@ -7,7 +7,12 @@
 </head>
 <body>
     <h1>Cadastro Usuário</h1>
-    <form action="/cadastro" method="post">
+
+    <div th:if="${mensagem}">
+        <p th:text="${mensagem}"></p>
+    </div>
+
+    <form action="/cadastrar" method="post">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required maxlength="35">
     
