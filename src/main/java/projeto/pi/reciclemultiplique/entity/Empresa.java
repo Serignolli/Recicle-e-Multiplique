@@ -15,7 +15,7 @@ public class Empresa extends AbstractEntity<Long> {
 	private String nomeEmpresa;
 	
 	@Column(name = "cnpj", nullable = false, unique = true, length = 14)
-	private Integer cnpj;
+	private String cnpj;
 	
 	@OneToOne
 	@JoinColumn(name = "endereco_id_fk")
@@ -35,11 +35,11 @@ public class Empresa extends AbstractEntity<Long> {
 		this.nomeEmpresa = nomeEmpresa;
 	}
 
-	public Integer getCnpj() {
+	public String getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(Integer cnpj) {
+	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
 

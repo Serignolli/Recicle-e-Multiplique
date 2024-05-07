@@ -18,7 +18,7 @@ public class Usuario extends AbstractEntity<Long> {
 	private String sobrenome;
 	
 	@Column(name = "cpf", nullable = false, unique = true, length = 11)
-	private Integer cpf;
+	private String cpf;
 	
 	@OneToOne
 	@JoinColumn(name = "endereco_id_fk")
@@ -42,10 +42,10 @@ public class Usuario extends AbstractEntity<Long> {
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
 	}
-	public Integer getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
-	public void setCpf(Integer cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 	public Endereco getEndereco() {
