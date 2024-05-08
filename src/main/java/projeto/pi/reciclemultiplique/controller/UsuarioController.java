@@ -67,5 +67,4 @@ public class UsuarioController {
     public String telaLogin() {
     	return "/usuario/login";
     }
-
 }
