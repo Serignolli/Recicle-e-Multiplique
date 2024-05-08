@@ -14,18 +14,22 @@ import projeto.pi.reciclemultiplique.entity.UF;
 import projeto.pi.reciclemultiplique.entity.Usuario;
 import projeto.pi.reciclemultiplique.service.UsuarioService;
 
+//Controller das funções do usuário
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
 
+    //Instância da service do usuário
     @Autowired
     private UsuarioService usuarioService;
     
+    //Request da página de cadastro do usuário
     @GetMapping("/cadastro")
     public String telaCadastro() {
     	return "/usuario/cadastro";
     }
 
+    //Inserção de cadastro do usuário
     @PostMapping("/cadastrar")
     public String cadastrar(@Validated Usuario usuario,
                             @RequestParam String logradouro,
@@ -36,6 +40,8 @@ public class UsuarioController {
                             @RequestParam Integer numero,
                             @RequestParam(required = false) String complemento,
                             RedirectAttributes redirectAttributes) {
+
+        //Inserção dos dados de endereço
         Endereco endereco = new Endereco();
         endereco.setLogradouro(logradouro);
         endereco.setBairro(bairro);
@@ -45,12 +51,21 @@ public class UsuarioController {
         endereco.setNumero(numero);
         endereco.setComplemento(complemento);
 
+        //Inserção do endereço no usuário
         usuario.setEndereco(endereco);
 
+        //Inserção do usuário
         usuarioService.salvar(usuario);
+
+        //Mensagem e sucesso com redirecionamento para a página de login
         redirectAttributes.addFlashAttribute("mensagem", "Usuário cadastrado com sucesso!");
-        return "redirect:/usuario/cadastro";
+        return "redirect:/usuario/login";
     }
 
+    //Request da página de login do usuário
+    @GetMapping("/login")
+    public String telaLogin() {
+    	return "/usuario/login";
+    }
 
 }
