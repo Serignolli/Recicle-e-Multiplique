@@ -1,5 +1,6 @@
 package projeto.pi.reciclemultiplique.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -20,7 +21,7 @@ public class Usuario extends AbstractEntity<Long> {
 	@Column(name = "cpf", nullable = false, unique = true, length = 11)
 	private String cpf;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco_id_fk")
 	private Endereco endereco;
 	

@@ -23,7 +23,7 @@ public class UsuarioController {
     
     @GetMapping("/cadastro")
     public String telaCadastro() {
-    	return "usuario/cadastro";
+    	return "/usuario/cadastro";
     }
 
     @PostMapping("/cadastrar")
