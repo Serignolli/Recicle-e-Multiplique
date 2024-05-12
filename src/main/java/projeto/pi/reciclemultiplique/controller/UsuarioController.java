@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import projeto.pi.reciclemultiplique.entity.Endereco;
-import projeto.pi.reciclemultiplique.entity.UF;
-import projeto.pi.reciclemultiplique.entity.Usuario;
+import projeto.pi.reciclemultiplique.domain.Endereco;
+import projeto.pi.reciclemultiplique.domain.UF;
+import projeto.pi.reciclemultiplique.domain.Usuario;
 import projeto.pi.reciclemultiplique.service.UsuarioService;
 
 //Controller das funções do usuário

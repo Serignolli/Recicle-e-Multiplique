@@ -1,4 +1,4 @@
-package projeto.pi.reciclemultiplique.entity;
+package projeto.pi.reciclemultiplique.domain;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

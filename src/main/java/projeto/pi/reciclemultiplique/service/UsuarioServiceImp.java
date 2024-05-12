@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import projeto.pi.reciclemultiplique.dao.UsuarioDao;
-import projeto.pi.reciclemultiplique.entity.Usuario;
+import projeto.pi.reciclemultiplique.domain.Usuario;
 
 @Service
 @Transactional

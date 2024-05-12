@@ -2,7 +2,7 @@ package projeto.pi.reciclemultiplique.dao;
 
 import java.util.List;
 
-import projeto.pi.reciclemultiplique.entity.Usuario;
+import projeto.pi.reciclemultiplique.domain.Usuario;
 
 public interface UsuarioDao {
 
