@@ -5,10 +5,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @SuppressWarnings("serial")
 @Table(name = "EMPRESA")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Empresa extends AbstractEntity<Long> {
 
 	@Column(name = "nomeEmpresa", nullable = false, length = 100)
@@ -27,45 +35,4 @@ public class Empresa extends AbstractEntity<Long> {
 	@Column(name = "senha", nullable = false, length = 20)
 	private String senha;
 
-	public String getNomeEmpresa() {
-		return nomeEmpresa;
-	}
-
-	public void setNomeEmpresa(String nomeEmpresa) {
-		this.nomeEmpresa = nomeEmpresa;
-	}
-
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	
-	
 }
