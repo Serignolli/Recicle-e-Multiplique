@@ -22,32 +22,32 @@ import projeto.pi.reciclemultiplique.repositories.UserRepository;
 @RequiredArgsConstructor
 public class AuthController {
 	private final UserRepository repository;
-	private final PasswordEncoder passwordEnconder; 
+	private final PasswordEncoder passwordEncoder;
 	private final TokenService tokenService;
 	
 	@PostMapping("/login")
 	public ResponseEntity login(@RequestBody LoginRequestDTO body) {
 		Usuario user = this.repository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("User not found"));
-        if(passwordEncoder.matches(body.password(), user.getPassword())) {
+        if(passwordEncoder.matches(body.password(), user.getSenha())) {
             String token = this.tokenService.generateToken(user);
-            return ResponseEntity.ok(new ResponseDTO(user.getName(), token));
+            return ResponseEntity.ok(new ResponseDTO(user.getNome(), token));
         }
         return ResponseEntity.badRequest().build();
 	}
 	
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody RegisterRequestDTO body){
-        Optional<usuario> user = this.repository.findByEmail(body.email());
+        Optional<Usuario> user = this.repository.findByEmail(body.email());
 
         if(user.isEmpty()) {
             Usuario newUser = new Usuario();
-            newUser.setPassword(passwordEncoder.encode(body.password()));
+            newUser.setSenha(passwordEncoder.encode(body.password()));
             newUser.setEmail(body.email());
-            newUser.setName(body.name());
+            newUser.setNome(body.name());
             this.repository.save(newUser);
 
             String token = this.tokenService.generateToken(newUser);
-            return ResponseEntity.ok(new ResponseDTO(newUser.getName(), token));
+            return ResponseEntity.ok(new ResponseDTO(newUser.getNome(), token));
         }
         return ResponseEntity.badRequest().build();
     }

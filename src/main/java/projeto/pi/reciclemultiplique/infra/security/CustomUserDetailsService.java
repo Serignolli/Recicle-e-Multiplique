@@ -9,16 +9,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import projeto.pi.reciclemultiplique.domain.Usuario;
+import projeto.pi.reciclemultiplique.repositories.UserRepository;
 
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserRepository repository
+	private UserRepository repository;
 	
 	@Override
-	public UserDetails loadUderByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario user = this.repository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Usuario não encontrado"));
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
+		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getSenha(), new ArrayList<>());
 	}
 }
