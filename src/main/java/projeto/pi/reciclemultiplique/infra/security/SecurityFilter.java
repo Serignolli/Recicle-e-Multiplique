@@ -15,14 +15,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import projeto.pi.reciclemultiplique.domain.Usuario;
-import projeto.pi.reciclemultiplique.repositories.UserRepository;
+import projeto.pi.reciclemultiplique.repositories.UsuarioRepository;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     TokenService tokenService;
     @Autowired
-    UserRepository userRepository;
+    UsuarioRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

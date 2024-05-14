@@ -4,24 +4,42 @@ import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
+import projeto.pi.reciclemultiplique.domain.Endereco;
+import projeto.pi.reciclemultiplique.domain.UF;
 import projeto.pi.reciclemultiplique.domain.Usuario;
 import projeto.pi.reciclemultiplique.dto.LoginRequestDTO;
-import projeto.pi.reciclemultiplique.dto.RegisterRequestDTO;
 import projeto.pi.reciclemultiplique.dto.ResponseDTO;
 import projeto.pi.reciclemultiplique.infra.security.TokenService;
-import projeto.pi.reciclemultiplique.repositories.UserRepository;
+import projeto.pi.reciclemultiplique.repositories.UsuarioRepository;
 
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
-	private final UserRepository repository;
+	
+    //Request da página de cadastro do usuário
+    @GetMapping("/registration")
+    public String RegistrationScreen() {
+    	return "/auth/registration";
+    }
+    
+    //Request da página de login do usuário
+    @GetMapping("/login")
+    public String LoginScreen() {
+    	return "/auth/login";
+    }
+    
+	private final UsuarioRepository repository;
 	private final PasswordEncoder passwordEncoder;
 	private final TokenService tokenService;
 	
@@ -35,20 +53,47 @@ public class AuthController {
         return ResponseEntity.badRequest().build();
 	}
 	
-    @PostMapping("/register")
-    public ResponseEntity register(@RequestBody RegisterRequestDTO body){
-        Optional<Usuario> user = this.repository.findByEmail(body.email());
+	@PostMapping("/register")
+	public String register(@RequestParam String email,
+	                                @RequestParam String senha,
+	                                @RequestParam String nome,
+	                                @RequestParam String logradouro,
+	                                @RequestParam String bairro,
+	                                @RequestParam String cidade,
+	                                @RequestParam String uf,
+	                                @RequestParam String cep,
+	                                @RequestParam Integer numero,
+	                                @RequestParam(required = false) String complemento,
+	                                RedirectAttributes redirectAttributes,
+	                                Model model) {
+	    
+	    Optional<Usuario> existingUser = this.repository.findByEmail(email);
 
-        if(user.isEmpty()) {
-            Usuario newUser = new Usuario();
-            newUser.setSenha(passwordEncoder.encode(body.password()));
-            newUser.setEmail(body.email());
-            newUser.setNome(body.name());
-            this.repository.save(newUser);
+	    if(existingUser.isEmpty()) {
+	        Endereco endereco = new Endereco();
+	        endereco.setLogradouro(logradouro);
+	        endereco.setBairro(bairro);
+	        endereco.setCidade(cidade);
+	        endereco.setUf(UF.valueOf(uf));
+	        endereco.setCep(cep);
+	        endereco.setNumero(numero);
+	        endereco.setComplemento(complemento);
+	        
+	        Usuario newUser = new Usuario();
+	        newUser.setEmail(email);
+	        newUser.setSenha(passwordEncoder.encode(senha));
+	        newUser.setNome(nome);
+	        newUser.setEndereco(endereco);
+	        
+	        this.repository.save(newUser);
 
-            String token = this.tokenService.generateToken(newUser);
-            return ResponseEntity.ok(new ResponseDTO(newUser.getNome(), token));
-        }
-        return ResponseEntity.badRequest().build();
-    }
+	        String token = this.tokenService.generateToken(newUser);
+
+	        redirectAttributes.addFlashAttribute("mensagem", "Usuário cadastrado com sucesso!");
+	        return "redirect:/auth/login";
+	    } else {
+	        model.addAttribute("erro", "Usuário já cadastrado");
+	        return "redirect:/auth/registration";
+	    }
+	}
 }
