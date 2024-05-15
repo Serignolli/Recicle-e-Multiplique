@@ -2,12 +2,10 @@ package projeto.pi.reciclemultiplique.controller;
 
 import java.util.Optional;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +15,6 @@ import lombok.RequiredArgsConstructor;
 import projeto.pi.reciclemultiplique.domain.Endereco;
 import projeto.pi.reciclemultiplique.domain.UF;
 import projeto.pi.reciclemultiplique.domain.Usuario;
-import projeto.pi.reciclemultiplique.dto.LoginRequestDTO;
-import projeto.pi.reciclemultiplique.dto.ResponseDTO;
 import projeto.pi.reciclemultiplique.infra.security.TokenService;
 import projeto.pi.reciclemultiplique.repositories.UsuarioRepository;
 
@@ -67,6 +63,8 @@ public class AuthController {
 	public String registerUs(@RequestParam String email,
 	                                @RequestParam String senha,
 	                                @RequestParam String nome,
+	                                @RequestParam String sobrenome,
+	                                @RequestParam String cpf,
 	                                @RequestParam String logradouro,
 	                                @RequestParam String bairro,
 	                                @RequestParam String cidade,
@@ -93,6 +91,8 @@ public class AuthController {
 	        newUser.setEmail(email);
 	        newUser.setSenha(passwordEncoder.encode(senha));
 	        newUser.setNome(nome);
+	        newUser.setSobrenome(sobrenome);
+	        newUser.setCpf(cpf);
 	        newUser.setEndereco(endereco);
 	        
 	        this.repository.save(newUser);
