@@ -14,15 +14,15 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import projeto.pi.reciclemultiplique.domain.Usuario;
-import projeto.pi.reciclemultiplique.repositories.UsuarioRepository;
+import projeto.pi.reciclemultiplique.domain.Empresa;
+import projeto.pi.reciclemultiplique.repositories.EmpresaRepository;
 
 @Component
-public class SecurityFilter extends OncePerRequestFilter {
+public class SecurityFilterEm extends OncePerRequestFilter {
     @Autowired
-    TokenService tokenService;
+    TokenServiceEm tokenService;
     @Autowired
-    UsuarioRepository userRepository;
+    EmpresaRepository empresaRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -30,9 +30,9 @@ public class SecurityFilter extends OncePerRequestFilter {
         var login = tokenService.validateToken(token);
 
         if(login != null){
-            Usuario usuario = userRepository.findByEmail(login).orElseThrow(() -> new RuntimeException("Ususario não encontrado"));
+            Empresa empresa = empresaRepository.findByEmail(login).orElseThrow(() -> new RuntimeException("Empresa não encontrada"));
             var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-            var authentication = new UsernamePasswordAuthenticationToken(usuario, null, authorities);
+            var authentication = new UsernamePasswordAuthenticationToken(empresa, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);

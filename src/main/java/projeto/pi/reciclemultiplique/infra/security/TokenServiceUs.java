@@ -15,7 +15,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import projeto.pi.reciclemultiplique.domain.Usuario;
 
 @Service
-public class TokenService {
+public class TokenServiceUs {
 	
 	@Value("${api.security.token.secret}")
 	private String secret;
