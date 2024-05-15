@@ -1,4 +1,4 @@
-package projeto.pi.reciclemultiplique.entity;
+package projeto.pi.reciclemultiplique.domain;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -6,10 +6,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @SuppressWarnings("serial")
 @Table(name = "USUARIO")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario extends AbstractEntity<Long> {
 
 	@Column(name = "nome", nullable = false, length = 35)
@@ -30,43 +39,5 @@ public class Usuario extends AbstractEntity<Long> {
 	
 	@Column(name = "senha", nullable = false, length = 20)
 	private String senha;
-	
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getSobrenome() {
-		return sobrenome;
-	}
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
 	
 }

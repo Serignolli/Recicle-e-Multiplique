@@ -1,4 +1,4 @@
-package projeto.pi.reciclemultiplique.entity;
+package projeto.pi.reciclemultiplique.domain;
 
 public enum UF {
     AC("AC", "Acre"),
