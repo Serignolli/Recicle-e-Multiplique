@@ -43,8 +43,8 @@ public class AuthController {
     	return "/auth/login";
     }
 	
-	@PostMapping("/login")
-	public String login(@RequestParam String email, 
+	@PostMapping("/loginUs")
+	public String loginUs(@RequestParam String email, 
 						@RequestParam String password, 
 						RedirectAttributes redirectAttributes, 
 						Model model) {
@@ -63,8 +63,8 @@ public class AuthController {
 	}
 
 	
-	@PostMapping("/register")
-	public String register(@RequestParam String email,
+	@PostMapping("/registerUs")
+	public String registerUs(@RequestParam String email,
 	                                @RequestParam String senha,
 	                                @RequestParam String nome,
 	                                @RequestParam String logradouro,
