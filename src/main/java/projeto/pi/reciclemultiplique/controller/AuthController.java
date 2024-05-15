@@ -48,9 +48,9 @@ public class AuthController {
     }
 	
 	@PostMapping("/loginUs")
-	public String loginUs(@RequestParam String email, 
-						@RequestParam String password, 
-						RedirectAttributes redirectAttributes, 
+	public String loginUs(@RequestParam String email,
+						@RequestParam String password,
+						RedirectAttributes redirectAttributes,
 						Model model) {
 		
 	    Usuario user = this.usuarioRepository.findByEmail(email).orElse(null);
@@ -118,9 +118,9 @@ public class AuthController {
 	//-------------------------
 	
 	@PostMapping("/loginEm")
-	public String loginEm(@RequestParam String email, 
-						@RequestParam String senha, 
-						RedirectAttributes redirectAttributes, 
+	public String loginEm(@RequestParam String email,
+						@RequestParam String senha,
+						RedirectAttributes redirectAttributes,
 						Model model) {
 		
 	    Empresa empresa = this.empresaRepository.findByEmail(email).orElse(null);
@@ -140,7 +140,7 @@ public class AuthController {
 	@PostMapping("/registerEm")
 	public String registerEm(@RequestParam String email,
 	                                @RequestParam String senha,
-	                                @RequestParam String nome,
+	                                @RequestParam String nomeEmpresa,
 	                                @RequestParam String cnpj,
 	                                @RequestParam String logradouro,
 	                                @RequestParam String bairro,
@@ -167,7 +167,7 @@ public class AuthController {
 	        Empresa newCompany = new Empresa();
 	        newCompany.setEmail(email);
 	        newCompany.setSenha(passwordEncoder.encode(senha));
-	        newCompany.setNome(nome);
+	        newCompany.setNomeEmpresa(nomeEmpresa);
 	        newCompany.setCnpj(cnpj);
 	        newCompany.setEndereco(endereco);
 	        
