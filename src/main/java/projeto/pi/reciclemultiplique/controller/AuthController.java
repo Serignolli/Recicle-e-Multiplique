@@ -27,31 +27,41 @@ import projeto.pi.reciclemultiplique.repositories.UsuarioRepository;
 @RequiredArgsConstructor
 public class AuthController {
 	
-    //Request da página de cadastro do usuário
-    @GetMapping("/registration")
-    public String RegistrationScreen() {
-    	return "/auth/registration";
-    }
-    
-    //Request da página de login do usuário
-    @GetMapping("/login")
-    public String LoginScreen() {
-    	return "/auth/login";
-    }
-    
 	private final UsuarioRepository repository;
 	private final PasswordEncoder passwordEncoder;
 	private final TokenService tokenService;
 	
+    //Request da página de cadastro do usuário
+    @GetMapping("/registrationPage")
+    public String RegistrationPage() {
+    	return "/auth/registration";
+    }
+    
+    //Request da página de login do usuário
+    @GetMapping("/loginPage")
+    public String LoginPage() {
+    	return "/auth/login";
+    }
+	
 	@PostMapping("/login")
-	public ResponseEntity login(@RequestBody LoginRequestDTO body) {
-		Usuario user = this.repository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("User not found"));
-        if(passwordEncoder.matches(body.password(), user.getSenha())) {
-            String token = this.tokenService.generateToken(user);
-            return ResponseEntity.ok(new ResponseDTO(user.getNome(), token));
-        }
-        return ResponseEntity.badRequest().build();
+	public String login(@RequestParam String email, 
+						@RequestParam String password, 
+						RedirectAttributes redirectAttributes, 
+						Model model) {
+		
+	    Usuario user = this.repository.findByEmail(email).orElse(null);
+	    
+	    if (user != null && passwordEncoder.matches(password, user.getSenha())) {
+	        String token = this.tokenService.generateToken(user);
+	        
+	        redirectAttributes.addFlashAttribute("mensagem", "Logando...");
+	        return "redirect:/usuario/pagina";
+	    } else {
+	        model.addAttribute("erro", "Credenciais incorretas");
+	        return "redirect:/auth/login";
+	    }
 	}
+
 	
 	@PostMapping("/register")
 	public String register(@RequestParam String email,
