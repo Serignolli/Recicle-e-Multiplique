@@ -21,5 +21,31 @@
         
         <button type="submit">Cadastrar</button>
     </form>
+
+    <form action="\mostrarContribuicaoUsuario">
+        <button type="submit">Ver suas contribuições</button>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Produto</th>
+            <th>Peso</th>
+            <th>Descrição</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Itera sobre a lista de contribuições -->
+        <tr th:each="contribuicao : ${contribuicoes}">
+            <td th:text="${nome}"></td>
+            <td th:text="${sobrenome}"></td>
+            <td th:text="${contribuicao.produto}"></td>
+            <td th:text="${contribuicao.peso}"></td>
+            <td th:text="${contribuicao.descricao}"></td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>

@@ -7,5 +7,31 @@
 </head>
 <body>
     <h1>Página da empresa</h1>
+
+    <form action="\mostrarContribuicao">
+        <button type="submit">Ver contribuições feitas</button>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Produto</th>
+            <th>Peso</th>
+            <th>Descrição</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Itera sobre a lista de contribuições -->
+        <tr th:each="contribuicao : ${contribuicoes}">
+            <td th:text="${nome}"></td>
+            <td th:text="${sobrenome}"></td>
+            <td th:text="${contribuicao.produto}"></td>
+            <td th:text="${contribuicao.peso}"></td>
+            <td th:text="${contribuicao.descricao}"></td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
