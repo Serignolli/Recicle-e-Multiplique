@@ -12,5 +12,4 @@ public class ReciclemultipliqueApplication {
 		System.out.print("Servidor subindo!");
 		System.out.print("*********************");
 	}
-
 }
