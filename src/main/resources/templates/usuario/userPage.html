@@ -8,6 +8,10 @@
 <body>
     <h1>Página do usuário</h1>
 
+    <div th:if="${mensagem}">
+        <p th:text="${mensagem}"></p>
+    </div>
+
     <h1>Cadastro de Contribuição</h1>
     <form action="/criarContribuicao" method="POST">
         <label for="produto">Produto:</label>

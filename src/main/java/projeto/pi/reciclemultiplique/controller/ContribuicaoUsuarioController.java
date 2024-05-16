@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
 import projeto.pi.reciclemultiplique.domain.Contribuicao;
@@ -26,7 +27,8 @@ public class ContribuicaoUsuarioController {
                                     @RequestParam String produto,
                                     @RequestParam Double peso,
                                     @RequestParam String Descricao,
-                                    @AuthenticationPrincipal Usuario usuario
+                                    @AuthenticationPrincipal Usuario usuario,
+                                    RedirectAttributes redirectAttributes
                                     ) {
 
         Contribuicao contribuicao = new Contribuicao();
@@ -37,6 +39,8 @@ public class ContribuicaoUsuarioController {
         contribuicao.setUsuario(usuario);
 
         this.contribuicaoRepository.save(contribuicao);
+
+        redirectAttributes.addFlashAttribute("mensagem", "Contribuição realizada com sucesso");
 
         return "/usuario/userPage";
     }
