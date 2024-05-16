@@ -7,5 +7,49 @@
 </head>
 <body>
     <h1>Página do usuário</h1>
+
+    <div th:if="${mensagem}">
+        <p th:text="${mensagem}"></p>
+    </div>
+
+    <h1>Cadastro de Contribuição</h1>
+    <form action="/criarContribuicao" method="POST">
+        <label for="produto">Produto:</label>
+        <input type="text" id="produto" name="produto" required maxlength="35"><br>
+        
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" name="peso" required step="0.01"><br>
+        
+        <label for="descricao">Descrição:</label><br>
+        <textarea id="descricao" name="descricao" rows="4" required maxlength="255"></textarea><br>
+        
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <form action="\mostrarContribuicaoUsuario">
+        <button type="submit">Ver suas contribuições</button>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Produto</th>
+            <th>Peso</th>
+            <th>Descrição</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Itera sobre a lista de contribuições -->
+        <tr th:each="contribuicao : ${contribuicoes}">
+            <td th:text="${nome}"></td>
+            <td th:text="${sobrenome}"></td>
+            <td th:text="${contribuicao.produto}"></td>
+            <td th:text="${contribuicao.peso}"></td>
+            <td th:text="${contribuicao.descricao}"></td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
