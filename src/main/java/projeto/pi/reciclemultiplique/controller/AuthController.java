@@ -31,7 +31,6 @@ public class AuthController {
 	
 	private final PasswordEncoder passwordEncoder;
 	
-	
 	private final TokenServiceUs tokenServiceUs;
 	private final TokenServiceEm tokenServiceEm;
 	

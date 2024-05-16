@@ -8,6 +8,18 @@
 <body>
     <h1>Página do usuário</h1>
 
-    
+    <h1>Cadastro de Contribuição</h1>
+    <form action="/criarContribuicao" method="POST">
+        <label for="produto">Produto:</label>
+        <input type="text" id="produto" name="produto" required maxlength="35"><br>
+        
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" name="peso" required step="0.01"><br>
+        
+        <label for="descricao">Descrição:</label><br>
+        <textarea id="descricao" name="descricao" rows="4" required maxlength="255"></textarea><br>
+        
+        <button type="submit">Cadastrar</button>
+    </form>
 </body>
 </html>
