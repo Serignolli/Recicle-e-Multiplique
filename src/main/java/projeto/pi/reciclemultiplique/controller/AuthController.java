@@ -28,7 +28,7 @@ public class AuthController {
 	
 	private final UsuarioRepository usuarioRepository;
 	private final EmpresaRepository empresaRepository;
-	
+
 	private final PasswordEncoder passwordEncoder;
 	
 	private final TokenServiceUs tokenServiceUs;
@@ -36,13 +36,13 @@ public class AuthController {
 	
     //Request da página de cadastro do usuário
     @GetMapping("/registrationPage")
-    public String RegistrationPage() {
+    public String registrationPage() {
     	return "/auth/registration";
     }
     
     //Request da página de login do usuário
     @GetMapping("/loginPage")
-    public String LoginPage() {
+    public String loginPage() {
     	return "/auth/login";
     }
 	
