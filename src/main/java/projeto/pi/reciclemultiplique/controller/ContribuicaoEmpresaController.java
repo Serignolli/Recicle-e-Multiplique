@@ -20,6 +20,10 @@ public class ContribuicaoEmpresaController {
 
     private final ContribuicaoRepository contribuicaoRepository;
 
+    public ContribuicaoEmpresaController(ContribuicaoRepository contribuicaoRepository){
+        this.contribuicaoRepository = contribuicaoRepository;
+    }
+
     @GetMapping("/mostrarContribuicao")
     public String mostarContribuicao(Model model){
 
