@@ -23,6 +23,10 @@ import projeto.pi.reciclemultiplique.repositories.ContribuicaoRepository;
 public class ContribuicaoUsuarioController {
 
     private final ContribuicaoRepository contribuicaoRepository;
+
+    public ContribuicaoUsuarioController(ContribuicaoRepository contribuicaoRepository){
+        this.contribuicaoRepository = contribuicaoRepository;
+    }
     
     @PostMapping("/criarContribuicao")
     public String criarContribuicao(
