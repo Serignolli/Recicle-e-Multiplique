@@ -13,10 +13,6 @@ import lombok.Setter;
 @Entity
 @SuppressWarnings("serial")
 @Table(name = "CONTRIBUICAO")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Contribuicao extends AbstractEntity<Long> {
 
     @Column(name = "produto", nullable = false, length = 35)
@@ -31,4 +27,37 @@ public class Contribuicao extends AbstractEntity<Long> {
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
+
+	public String getProduto() {
+		return produto;
+	}
+
+	public void setProduto(String produto) {
+		this.produto = produto;
+	}
+
+	public double getPeso() {
+		return peso;
+	}
+
+	public void setPeso(double peso) {
+		this.peso = peso;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+    
 }
