@@ -29,12 +29,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        //.requestMatchers("/**").permitAll()
-                        //.requestMatchers("/h2-console").permitAll()
-                        //.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        //.requestMatchers(HttpMethod.POST, "/auth/registration").permitAll()
-                        //.anyRequest().authenticated()
-                        .requestMatchers("/usuario/**").authenticated()
+                        .requestMatchers("/usuario/**").hasRole("USER")
                         .requestMatchers("/empresa/**").authenticated()
                         .anyRequest().permitAll()
                 )

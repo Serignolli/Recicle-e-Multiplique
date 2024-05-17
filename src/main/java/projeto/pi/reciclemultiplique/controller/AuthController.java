@@ -55,13 +55,13 @@ public class AuthController {
 	
 	@PostMapping("/loginUs")
 	public String loginUs(@RequestParam String email,
-						@RequestParam String password,
+						@RequestParam String senha,
 						RedirectAttributes redirectAttributes,
 						Model model) {
 		
 	    Usuario user = this.usuarioRepository.findByEmail(email).orElse(null);
 	    
-	    if (user != null && passwordEncoder.matches(password, user.getSenha())) {
+	    if (user != null && passwordEncoder.matches(senha, user.getSenha())) {
 	        String token = this.tokenServiceUs.generateToken(user);
 	        
 	        redirectAttributes.addFlashAttribute("mensagem", "Logando...");
