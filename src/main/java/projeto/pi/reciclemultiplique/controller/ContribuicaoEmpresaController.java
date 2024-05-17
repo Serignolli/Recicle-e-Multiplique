@@ -3,6 +3,7 @@ package projeto.pi.reciclemultiplique.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import projeto.pi.reciclemultiplique.domain.Contribuicao;
 import projeto.pi.reciclemultiplique.domain.Usuario;
 import projeto.pi.reciclemultiplique.repositories.ContribuicaoRepository;
 
+@Controller
 @RequestMapping("/empresa")
 @RequiredArgsConstructor
 public class ContribuicaoEmpresaController {
