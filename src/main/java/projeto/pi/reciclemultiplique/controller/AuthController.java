@@ -3,15 +3,14 @@ package projeto.pi.reciclemultiplique.controller;
 import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import lombok.RequiredArgsConstructor;
 import projeto.pi.reciclemultiplique.domain.Empresa;
 import projeto.pi.reciclemultiplique.domain.Endereco;
 import projeto.pi.reciclemultiplique.domain.UF;
@@ -21,9 +20,8 @@ import projeto.pi.reciclemultiplique.infra.security.TokenServiceUs;
 import projeto.pi.reciclemultiplique.repositories.EmpresaRepository;
 import projeto.pi.reciclemultiplique.repositories.UsuarioRepository;
 
-@RestController
+@Controller
 @RequestMapping("/auth")
-@RequiredArgsConstructor
 public class AuthController {
 	
 	private final UsuarioRepository usuarioRepository;
@@ -34,6 +32,15 @@ public class AuthController {
 	private final TokenServiceUs tokenServiceUs;
 	private final TokenServiceEm tokenServiceEm;
 	
+    public AuthController(UsuarioRepository usuarioRepository, EmpresaRepository empresaRepository,
+            PasswordEncoder passwordEncoder, TokenServiceUs tokenServiceUs, TokenServiceEm tokenServiceEm) {
+		this.usuarioRepository = usuarioRepository;
+		this.empresaRepository = empresaRepository;
+		this.passwordEncoder = passwordEncoder;
+		this.tokenServiceUs = tokenServiceUs;
+		this.tokenServiceEm = tokenServiceEm;
+	}
+			
     //Request da página de cadastro do usuário
     @GetMapping("/registrationPage")
     public String registrationPage() {
@@ -48,20 +55,20 @@ public class AuthController {
 	
 	@PostMapping("/loginUs")
 	public String loginUs(@RequestParam String email,
-						@RequestParam String password,
+						@RequestParam String senha,
 						RedirectAttributes redirectAttributes,
 						Model model) {
 		
 	    Usuario user = this.usuarioRepository.findByEmail(email).orElse(null);
 	    
-	    if (user != null && passwordEncoder.matches(password, user.getSenha())) {
+	    if (user != null && passwordEncoder.matches(senha, user.getSenha())) {
 	        String token = this.tokenServiceUs.generateToken(user);
 	        
 	        redirectAttributes.addFlashAttribute("mensagem", "Logando...");
-	        return "redirect:/usuario/pagina";
+	        return "redirect:/usuario/userPage";
 	    } else {
 	        model.addAttribute("erro", "Credenciais incorretas");
-	        return "redirect:/auth/login";
+	        return "/auth/login";
 	    }
 	}
 
@@ -107,10 +114,10 @@ public class AuthController {
 	        String token = this.tokenServiceUs.generateToken(newUser);
 
 	        redirectAttributes.addFlashAttribute("mensagem", "Usuário cadastrado com sucesso!");
-	        return "redirect:/auth/login";
+	        return "redirect:/auth/loginPage";
 	    } else {
 	        model.addAttribute("erro", "Usuário já cadastrado");
-	        return "redirect:/auth/registration";
+	        return "/auth/registration";
 	    }
 	}
 	
@@ -128,10 +135,10 @@ public class AuthController {
 	        String token = this.tokenServiceEm.generateToken(empresa);
 	        
 	        redirectAttributes.addFlashAttribute("mensagem", "Logando...");
-	        return "redirect:/empresa/pagina";
+	        return "redirect:/empresa/companyPage";
 	    } else {
 	        model.addAttribute("erro", "Credenciais incorretas");
-	        return "redirect:/auth/login";
+	        return "/auth/login";
 	    }
 	}
 
@@ -175,10 +182,10 @@ public class AuthController {
 	        String token = this.tokenServiceEm.generateToken(newCompany);
 
 	        redirectAttributes.addFlashAttribute("mensagem", "Empresa cadastrada com sucesso!");
-	        return "redirect:/auth/login";
+	        return "redirect:/auth/loginPage";
 	    } else {
 	        model.addAttribute("erro", "Empresa já cadastrada");
-	        return "redirect:/auth/registration";
+	        return "/auth/registration";
 	    }
 	}
 
