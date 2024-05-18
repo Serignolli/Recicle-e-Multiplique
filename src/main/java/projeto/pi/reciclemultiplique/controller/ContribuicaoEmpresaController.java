@@ -8,14 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import lombok.RequiredArgsConstructor;
 import projeto.pi.reciclemultiplique.domain.Contribuicao;
 import projeto.pi.reciclemultiplique.domain.Usuario;
 import projeto.pi.reciclemultiplique.repositories.ContribuicaoRepository;
 
 @Controller
 @RequestMapping("/empresa")
-@RequiredArgsConstructor
 public class ContribuicaoEmpresaController {
 
     private final ContribuicaoRepository contribuicaoRepository;

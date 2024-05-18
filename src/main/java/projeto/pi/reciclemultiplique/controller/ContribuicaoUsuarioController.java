@@ -12,14 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import lombok.RequiredArgsConstructor;
 import projeto.pi.reciclemultiplique.domain.Contribuicao;
 import projeto.pi.reciclemultiplique.domain.Usuario;
 import projeto.pi.reciclemultiplique.repositories.ContribuicaoRepository;
 
 @Controller
 @RequestMapping("/usuario")
-@RequiredArgsConstructor
 public class ContribuicaoUsuarioController {
 
     private final ContribuicaoRepository contribuicaoRepository;
