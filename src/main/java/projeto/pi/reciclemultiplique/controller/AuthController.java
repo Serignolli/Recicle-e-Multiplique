@@ -29,13 +29,11 @@ public class AuthController {
 		this.empresaRepository = empresaRepository;
 	}
 			
-    //Request da página de cadastro do usuário
     @GetMapping("/registrationPage")
     public String registrationPage() {
     	return "/auth/registration";
     }
     
-    //Request da página de login do usuário
     @GetMapping("/loginPage")
     public String loginPage() {
     	return "/auth/login";
