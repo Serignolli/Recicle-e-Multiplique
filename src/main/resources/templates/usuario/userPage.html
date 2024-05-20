@@ -13,7 +13,7 @@
     </div>
 
     <h1>Cadastro de Contribuição</h1>
-    <form action="/criarContribuicao" method="POST">
+    <form action="/usuario/criarContribuicao" method="POST">
         <label for="produto">Produto:</label>
         <input type="text" id="produto" name="produto" required maxlength="35"><br>
         
@@ -26,7 +26,7 @@
         <button type="submit">Cadastrar</button>
     </form>
 
-    <form action="\mostrarContribuicaoUsuario">
+    <form action="/usuario/mostrarContribuicaoUsuario">
         <button type="submit">Ver suas contribuições</button>
     </form>
 
@@ -51,5 +51,9 @@
         </tr>
         </tbody>
     </table>
+
+    <form action="/auth/logout">
+        <button type="submit" style="color: red;">LOGOUT</button>
+    </form>
 </body>
 </html>

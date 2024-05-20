@@ -8,6 +8,10 @@
 <body>
     <h1>Login</h1>
 
+    <div th:if="${erro}">
+        <p th:text="${erro}"></p>
+    </div>
+
     <div th:if="${mensagem}">
         <p th:text="${mensagem}"></p>
     </div>
