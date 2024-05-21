@@ -1,14 +1,11 @@
 package projeto.pi.reciclemultiplique.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @SuppressWarnings("serial")
@@ -21,7 +18,7 @@ public class Empresa extends AbstractEntity<Long> {
 	@Column(name = "cnpj", nullable = false, unique = true, length = 14)
 	private String cnpj;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco_id_fk")
 	private Endereco endereco;
 	

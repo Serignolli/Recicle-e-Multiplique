@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpSession;
+import projeto.pi.reciclemultiplique.domain.Empresa;
 import projeto.pi.reciclemultiplique.domain.Endereco;
 import projeto.pi.reciclemultiplique.domain.UF;
 import projeto.pi.reciclemultiplique.domain.Usuario;
@@ -48,7 +49,7 @@ public class AuthController {
 	
 		Usuario usuario = this.usuarioRepository.findByEmail(email).orElse(null);
 	
-		if (usuario != null && senha.matches(usuario.getSenha())) {
+		if (usuario != null && senha.matches(usuario.getSenha())){
 
 			session.setAttribute("user", usuario);
 			return "redirect:/usuario/userPage";
@@ -101,6 +102,69 @@ public class AuthController {
 	        return "redirect:/auth/loginPage";
 	    } else {
 	        model.addAttribute("erro", "Usuário já cadastrado");
+	        return "/auth/registration";
+	    }
+	}
+
+	@PostMapping("/loginEm")
+	public String loginEm(@RequestParam String email,
+						   @RequestParam String senha,
+						   HttpSession session,
+						   RedirectAttributes redirectAttributes,
+						   Model model) {
+	
+		Empresa empresa = this.empresaRepository.findByEmail(email).orElse(null);
+	
+		if (empresa != null && senha.matches(empresa.getSenha())) {
+
+			session.setAttribute("company", empresa);
+			return "redirect:/empresa/companyPage";
+		} else {
+			model.addAttribute("erro", "Credenciais incorretas");
+			return "/auth/login";
+		}
+	}
+
+	@PostMapping("/registerEm")
+	public String registerEm(@RequestParam String email,
+	                                @RequestParam String senha,
+	                                @RequestParam String nomeEmpresa,
+	                                @RequestParam String cnpj,
+	                                @RequestParam String logradouro,
+	                                @RequestParam String bairro,
+	                                @RequestParam String cidade,
+	                                @RequestParam String uf,
+	                                @RequestParam String cep,
+	                                @RequestParam Integer numero,
+	                                @RequestParam(required = false) String complemento,
+	                                RedirectAttributes redirectAttributes,
+	                                Model model) {
+	    
+	    Optional<Empresa> existingCompany = this.empresaRepository.findByEmail(email);
+
+	    if(existingCompany.isEmpty()) {
+	        Endereco endereco = new Endereco();
+	        endereco.setLogradouro(logradouro);
+	        endereco.setBairro(bairro);
+	        endereco.setCidade(cidade);
+	        endereco.setUf(UF.valueOf(uf));
+	        endereco.setCep(cep);
+	        endereco.setNumero(numero);
+	        endereco.setComplemento(complemento);
+	        
+	        Empresa newCompany = new Empresa();
+	        newCompany.setEmail(email);
+	        newCompany.setSenha(senha);
+	        newCompany.setNomeEmpresa(nomeEmpresa);
+	        newCompany.setCnpj(cnpj);
+	        newCompany.setEndereco(endereco);
+	        
+	        this.empresaRepository.save(newCompany);
+
+	        redirectAttributes.addFlashAttribute("mensagem", "Empresaa cadastrada com sucesso!");
+	        return "redirect:/auth/loginPage";
+	    } else {
+	        model.addAttribute("erro", "Empresa já cadastrada");
 	        return "/auth/registration";
 	    }
 	}
