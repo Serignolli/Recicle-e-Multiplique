@@ -19,4 +19,14 @@ public class EmpresaController {
             return "redirect:/auth/loginPage";
         }
 	}
+
+    @GetMapping("/alter/alterPage")
+    public String alterPage(HttpSession session) {
+
+        if (session.getAttribute("company") != null) {
+            return "/empresa/alter/alterPage";
+        } else {
+            return "redirect:/auth/loginPage";
+        }
+    }
 }

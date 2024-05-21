@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Alterar dados</h1>
+    <form action="/empresa/alter/alterar" method="POST">
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required><br>
+        
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required><br>
+        
+        <button type="submit">Alterar</button>
+    </form>
+
+    <form action="/empresa/alter/deletar" method="POST">
+        <button type="submit">Deletar conta</button>
+    </form>
+</body>
+</html>

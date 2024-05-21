@@ -19,4 +19,14 @@ public class UsuarioController {
             return "redirect:/auth/loginPage";
         }
     }
+
+    @GetMapping("/alter/alterPage")
+    public String alterPage(HttpSession session) {
+
+        if (session.getAttribute("user") != null) {
+            return "/usuario/alter/alterPage";
+        } else {
+            return "redirect:/auth/loginPage";
+        }
+    }
 }
