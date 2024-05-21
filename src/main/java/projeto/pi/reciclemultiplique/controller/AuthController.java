@@ -1,7 +1,5 @@
 package projeto.pi.reciclemultiplique.controller;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,15 +15,22 @@ import projeto.pi.reciclemultiplique.domain.UF;
 import projeto.pi.reciclemultiplique.domain.Usuario;
 import projeto.pi.reciclemultiplique.repositories.EmpresaRepository;
 import projeto.pi.reciclemultiplique.repositories.UsuarioRepository;
+import projeto.pi.reciclemultiplique.service.EmpresaService;
+import projeto.pi.reciclemultiplique.service.UsuarioService;
 
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
 	
+	private final UsuarioService usuarioService;
+	private final EmpresaService empresaService;
 	private final UsuarioRepository usuarioRepository;
 	private final EmpresaRepository empresaRepository;
 	
-    public AuthController(UsuarioRepository usuarioRepository, EmpresaRepository empresaRepository) {
+    public AuthController(UsuarioService usuarioService, EmpresaService empresaService,
+                          UsuarioRepository usuarioRepository, EmpresaRepository empresaRepository) {
+		this.usuarioService = usuarioService;
+		this.empresaService = empresaService;
 		this.usuarioRepository = usuarioRepository;
 		this.empresaRepository = empresaRepository;
 	}
@@ -76,34 +81,27 @@ public class AuthController {
 	                                RedirectAttributes redirectAttributes,
 	                                Model model) {
 	    
-	    Optional<Usuario> existingUser = this.usuarioRepository.findByEmail(email);
+	    Endereco endereco = new Endereco();
+        endereco.setLogradouro(logradouro);
+        endereco.setBairro(bairro);
+        endereco.setCidade(cidade);
+        endereco.setUf(UF.valueOf(uf));
+        endereco.setCep(cep);
+        endereco.setNumero(numero);
+        endereco.setComplemento(complemento);
 
-	    if(existingUser.isEmpty()) {
-	        Endereco endereco = new Endereco();
-	        endereco.setLogradouro(logradouro);
-	        endereco.setBairro(bairro);
-	        endereco.setCidade(cidade);
-	        endereco.setUf(UF.valueOf(uf));
-	        endereco.setCep(cep);
-	        endereco.setNumero(numero);
-	        endereco.setComplemento(complemento);
-	        
-	        Usuario newUser = new Usuario();
-	        newUser.setEmail(email);
-	        newUser.setSenha(senha);
-	        newUser.setNome(nome);
-	        newUser.setSobrenome(sobrenome);
-	        newUser.setCpf(cpf);
-	        newUser.setEndereco(endereco);
-	        
-	        this.usuarioRepository.save(newUser);
+        Usuario usuario = new Usuario();
+        usuario.setEmail(email);
+        usuario.setSenha(senha);
+        usuario.setNome(nome);
+        usuario.setSobrenome(sobrenome);
+        usuario.setCpf(cpf);
+        usuario.setEndereco(endereco);
 
-	        redirectAttributes.addFlashAttribute("mensagem", "Usuário cadastrado com sucesso!");
-	        return "redirect:/auth/loginPage";
-	    } else {
-	        model.addAttribute("erro", "Usuário já cadastrado");
-	        return "/auth/registration";
-	    }
+        String result = usuarioService.inserirUsuario(usuario);
+
+        redirectAttributes.addFlashAttribute("mensagem", result);
+        return "redirect:/auth/loginPage";
 	}
 
 	@PostMapping("/loginEm")
@@ -140,33 +138,26 @@ public class AuthController {
 	                                RedirectAttributes redirectAttributes,
 	                                Model model) {
 	    
-	    Optional<Empresa> existingCompany = this.empresaRepository.findByEmail(email);
+	    Endereco endereco = new Endereco();
+        endereco.setLogradouro(logradouro);
+        endereco.setBairro(bairro);
+        endereco.setCidade(cidade);
+        endereco.setUf(UF.valueOf(uf));
+        endereco.setCep(cep);
+        endereco.setNumero(numero);
+        endereco.setComplemento(complemento);
 
-	    if(existingCompany.isEmpty()) {
-	        Endereco endereco = new Endereco();
-	        endereco.setLogradouro(logradouro);
-	        endereco.setBairro(bairro);
-	        endereco.setCidade(cidade);
-	        endereco.setUf(UF.valueOf(uf));
-	        endereco.setCep(cep);
-	        endereco.setNumero(numero);
-	        endereco.setComplemento(complemento);
-	        
-	        Empresa newCompany = new Empresa();
-	        newCompany.setEmail(email);
-	        newCompany.setSenha(senha);
-	        newCompany.setNomeEmpresa(nomeEmpresa);
-	        newCompany.setCnpj(cnpj);
-	        newCompany.setEndereco(endereco);
-	        
-	        this.empresaRepository.save(newCompany);
+        Empresa empresa = new Empresa();
+        empresa.setEmail(email);
+        empresa.setSenha(senha);
+        empresa.setNomeEmpresa(nomeEmpresa);
+        empresa.setCnpj(cnpj);
+        empresa.setEndereco(endereco);
 
-	        redirectAttributes.addFlashAttribute("mensagem", "Empresaa cadastrada com sucesso!");
-	        return "redirect:/auth/loginPage";
-	    } else {
-	        model.addAttribute("erro", "Empresa já cadastrada");
-	        return "/auth/registration";
-	    }
+        String result = empresaService.inserirEmpresa(empresa);
+
+        redirectAttributes.addFlashAttribute("mensagem", result);
+        return "redirect:/auth/loginPage";
 	}
 
 	@GetMapping("/logout")

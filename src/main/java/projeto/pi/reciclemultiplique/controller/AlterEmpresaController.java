@@ -9,6 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpSession;
 import projeto.pi.reciclemultiplique.domain.Empresa;
+import projeto.pi.reciclemultiplique.service.EmpresaService;
 
 
 @Controller
@@ -26,7 +27,7 @@ public class AlterEmpresaController {
             redirectAttributes.addFlashAttribute("erro", "Usuário não está autenticado");
         }
         
-        empresaService.updateUser(empresa.getId(), email, senha);
+        empresaService.alterarEmpresa(empresa.getId(), email, senha);
         redirectAttributes.addFlashAttribute("mensagem", "Perfil atualizado com sucesso!");
 
         return "redirect:/auth/loginPage";
@@ -40,7 +41,7 @@ public class AlterEmpresaController {
             redirectAttributes.addFlashAttribute("erro", "Usuário não está autenticado");
         }
         
-        empresaService.deletarempresa(empresa.getId());
+        empresaService.deletarEmpresa(empresa.getId());
         redirectAttributes.addFlashAttribute("mensagem", "Perfil atualizado com sucesso!");
         return "redirect:/auth/loginPage";
     }
