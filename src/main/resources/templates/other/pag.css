@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 400px;
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1),
+                0 5px 12px -2px rgba(0, 0, 0, 0.1),
+                0 18px 36px -6px rgba(0, 0, 0, 0.1);
+}
+
+.container .title {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container form input {
+    display: none;
+}
+
+.container form .category {
+    margin-top: 10px;
+    padding-top: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px;
+}
+
+.category label {
+    height: 145px;
+    padding: 20px;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+}
+
+#pix:checked ~ .category .pixMethod,
+#cartao:checked ~ .category .cartaoMethod,
+#qrcode:checked ~ .category .qrcodeMethod,
+#boleto:checked ~ .category .boletoMethod {
+    box-shadow: 0px 0px 0px 1px #247238;
+}
+
+#pix:checked ~ .category .pixMethod .check,
+#cartao:checked ~ .category .cartaoMethod .check,
+#qrcode:checked ~ .category .qrcodeMethod .check,
+#boleto:checked ~ .category .boletoMethod .check {
+    display: block;
+}
+
+label .imgName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.imgName span {
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    top: 72%;
+    transform: translateY(-72%);
+}
+
+.imgName .imgContainer {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 35%;
+    transform: translateY(-35%);
+}
+
+img {
+    width: 50px;
+    height: auto;
+}
+
+.pix img {
+    width: 60px;
+}
+
+.cartao img {
+    width: 70px;
+}
+
+.qrcode img {
+    width: 80px;
+}
+
+.boleto img {
+    width: 60px;
+}
+
+.check {
+    display: none;
+    position: absolute;
+    top: -4px;
+    right: -4px;
+}
+
+.check i {
+    font-size: 18px;
+}

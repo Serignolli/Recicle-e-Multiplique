@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            text-align: center; 
+        }
+
+        .product {
+            display: inline-block; 
+            margin: 20px;
+            text-align: left; 
+        }
+
+        .product img {
+            width: 200px; 
+            height: auto;
+        }
+
+        .product .info {
+            margin-top: 10px; 
+        }
+
+        .quantity button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .quantity span {
+            padding: 10px 15px;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        .summary {
+            margin-top: 50px; 
+            padding: 20px;
+            background-color: #f0f0f0;
+            text-align: left;
+            display: block; 
+            margin-left: auto; 
+            margin-right: auto;
+            max-width: 600px; 
+        }
+
+        .summary ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .summary li {
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin-top: 20px; 
+            padding: 10px 20px; 
+            font-size: 16px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        @media (max-width: 768px) {
+            .product {
+                display: block; 
+                margin: 20px auto; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Carrinho de Compras</h1>
+        <div class="product">
+            <img src="moletom-foda.jpg" alt="Moletom Foda">
+            <div class="info">
+                <h2>Moletom Foda</h2>
+                <p>R$ 119,99 à vista</p>
+                <p>ou 10x de R$ 13,00</p>
+                <div class="quantity">
+                    <button onclick="decrementQuantity(this)">-</button>
+                    <span class="quantity-value">1</span>
+                    <button onclick="incrementQuantity(this)">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="product">
+            <img src="camisa-com-estampa.jpg" alt="Camisa com Estampa">
+            <div class="info">
+                <h2>Camisa com Estampa</h2>
+                <p>R$ 59,90 à vista</p>
+                <div class="quantity">
+                    <button onclick="decrementQuantity(this)">-</button>
+                    <span class="quantity-value">1</span>
+                    <button onclick="incrementQuantity(this)">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="product">
+            <img src="moletom-rasgado.jpg" alt="Moletom Rasgado">
+            <div class="info">
+                <h2>Moletom Rasgado</h2>
+                <p>R$ 350,00 à vista</p>
+                <p>ou 10x de R$ 28,00 sem juros</p>
+                <div class="quantity">
+                    <button onclick="decrementQuantity(this)">-</button>
+                    <span class="quantity-value">1</span>
+                    <button onclick="incrementQuantity(this)">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="product">
+            <img src="camiseta-de-folha.jpg" alt="Camiseta de Folha">
+            <div class="info">
+                <h2>Camiseta de Folha</h2>
+                <p>R$ 159,90 à vista</p>
+                <p>a partir de R$ 25,85/mês</p>
+                <div class="quantity">
+                    <button onclick="decrementQuantity(this)">-</button>
+                    <span class="quantity-value">1</span>
+                    <button onclick="incrementQuantity(this)">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="summary">
+        <h2>Resumo</h2>
+        <ul>
+            <li>
+                <p>Valor dos Produtos:</p>
+                <p>R$ 689,79</p>
+            </li>
+            <li>
+                <p>Valor do Frete:</p>
+                <p>R$ 15,00</p>
+            </li>
+            <li>
+                <p>Descontos:</p>
+                <p>R$ -10,00</p>
+            </li>
+            <li>
+                <p>Total:</p>
+                <p>R$ 694,79</p>
+            </li>
+        </ul>
+        <button>Calcular Frete</button>
+        <button>Receber em Casa</button>
+    </div>
+
+    <script>
+        function incrementQuantity(button) {
+            var quantityElement = button.parentElement.querySelector('.quantity-value');
+            var quantity = parseInt(quantityElement.textContent);
+            quantity++;
+            quantityElement.textContent = quantity;
+        }
+
+        function decrementQuantity(button) {
+            var quantityElement = button.parentElement.querySelector('.quantity-value');
+            var quantity = parseInt(quantityElement.textContent);
+            if (quantity > 1) {
+                quantity--;
+                quantityElement.textContent = quantity;
+            }
+        }
+    </script>
+</body>
+</html>

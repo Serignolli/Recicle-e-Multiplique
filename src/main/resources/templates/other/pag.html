@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Pagamento</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="pag.css">
+</head>
+<body>
+   
+    <div class="container">
+        <div class="title">
+            <h4>Selecione o método de <span style="color: #2b5836">Pagamento</span></h4>
+        </div>
+
+        <form action="#">
+            <input type="radio" name="payment" id="pix">
+            <input type="radio" name="payment" id="cartao">
+            <input type="radio" name="payment" id="qrcode">
+            <input type="radio" name="payment" id="boleto">
+
+            <div class="category">
+                <label for="pix" class="pixMethod">
+                    <div class="imgName">
+                        <div class="imgContainer pix">
+                            <img src="pix.png" alt="">
+                        </div>
+                        <span class="name">Pix</span>
+                    </div>
+                    <span class="check"><i class="fa-solid fa-circle-check" style="color: #6bcf84;"></i></span>
+                </label>
+
+                <label for="cartao" class="cartaoMethod">
+                    <div class="imgName">
+                        <div class="imgContainer cartao">
+                            <img src="cartao.jpg" alt="">
+                        </div>
+                        <span class="name">Cartão</span>
+                    </div>
+                    <span class="check"><i class="fa-solid fa-circle-check" style="color: #6bcf84;"></i></span>
+                </label>
+
+                <label for="qrcode" class="qrcodeMethod">
+                    <div class="imgName">
+                        <div class="imgContainer qrcode">
+                            <img src="QRlogo.png" alt="">
+                        </div>
+                        <span class="name">QR Code</span>
+                    </div>
+                    <span class="check"><i class="fa-solid fa-circle-check" style="color: #6bcf84;"></i></span>
+                </label>
+
+                <label for="boleto" class="boletoMethod">
+                    <div class="imgName">
+                        <div class="imgContainer boleto">
+                            <img src="boleto.png" alt="">
+                        </div>
+                        <span class="name">Boleto</span>
+                    </div>
+                    <span class="check"><i class="fa-solid fa-circle-check" style="color: #6bcf84;"></i></span>
+                </label>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
