@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/usuario/alter/alterPage.css">
+    <title>Alterar Dados</title>
 </head>
 <body>
-    <h1>Alterar dados</h1>
-    <form action="/usuario/alter/alterar" method="POST">
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required><br>
-        
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required><br>
-        
-        <button type="submit">Alterar</button>
-    </form>
+    <header>
+        <h1>Alterar Dados</h1>
+    </header>
 
-    <form action="/usuario/alter/deletar">
-        <button type="submit">Deletar conta</button>
-    </form>
+    <section>
+        <h2>Atualizar Informações</h2>
+        <form action="/usuario/alter/alterar" method="POST">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required><br>
+            
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required><br>
+            
+            <button type="submit">Alterar</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Deletar Conta</h2>
+        <form action="/usuario/alter/deletar" method="POST">
+            <button type="submit" class="delete-button">Deletar conta</button>
+        </form>
+    </section>
 </body>
 </html>

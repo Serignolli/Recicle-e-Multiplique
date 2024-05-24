@@ -3,57 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/usuario/userPage.css">
+    <title>Página do Usuário</title>
 </head>
 <body>
-    <h1>Página do usuário</h1>
+    <header>
+        <h1>Página do Usuário</h1>
+    </header>
 
-    <div th:if="${mensagem}">
+    <div th:if="${mensagem}" class="message">
         <p th:text="${mensagem}"></p>
     </div>
 
-    <h1>Cadastro de Contribuição</h1>
-    <form action="/usuario/criarContribuicao" method="POST">
-        <label for="produto">Produto:</label>
-        <input type="text" id="produto" name="produto" required maxlength="35"><br>
-        
-        <label for="peso">Peso (kg):</label>
-        <input type="number" id="peso" name="peso" required step="0.01"><br>
-        
-        <label for="descricao">Descrição:</label><br>
-        <textarea id="descricao" name="descricao" rows="4" required maxlength="255"></textarea><br>
-        
-        <button type="submit">Cadastrar</button>
-    </form>
+    <section>
+        <h2>Cadastro de Contribuição</h2>
+        <form action="/usuario/criarContribuicao" method="POST">
+            <label for="produto">Produto:</label>
+            <input type="text" id="produto" name="produto" required maxlength="35"><br>
 
-    <form action="/usuario/mostrarContribuicaoUsuario">
-        <button type="submit">Ver suas contribuições</button>
-    </form>
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" name="peso" required step="0.01"><br>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Sobrenome</th>
-            <th>Produto</th>
-            <th>Peso</th>
-            <th>Descrição</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Itera sobre a lista de contribuições -->
-        <tr th:each="contribuicao : ${contribuicoes}">
-            <td th:text="${nome}"></td>
-            <td th:text="${sobrenome}"></td>
-            <td th:text="${contribuicao.produto}"></td>
-            <td th:text="${contribuicao.peso}"></td>
-            <td th:text="${contribuicao.descricao}"></td>
-        </tr>
-        </tbody>
-    </table>
+            <label for="descricao">Descrição:</label><br>
+            <textarea id="descricao" name="descricao" rows="4" required maxlength="255"></textarea><br>
 
-    <form action="/auth/logout">
-        <button type="submit" style="color: red;">LOGOUT</button>
-    </form>
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <form action="/usuario/mostrarContribuicaoUsuario">
+            <button type="submit">Ver suas contribuições</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Suas Contribuições</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>Produto</th>
+                <th>Peso</th>
+                <th>Descrição</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="contribuicao : ${contribuicoes}">
+                <td th:text="${nome}"></td>
+                <td th:text="${sobrenome}"></td>
+                <td th:text="${contribuicao.produto}"></td>
+                <td th:text="${contribuicao.peso}"></td>
+                <td th:text="${contribuicao.descricao}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <form action="/auth/logout">
+            <button type="submit" style="color: red;">LOGOUT</button>
+        </form>
+    </footer>
 </body>
 </html>
