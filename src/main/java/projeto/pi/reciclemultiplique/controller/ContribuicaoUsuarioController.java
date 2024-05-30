@@ -13,16 +13,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.servlet.http.HttpSession;
 import projeto.pi.reciclemultiplique.domain.Contribuicao;
 import projeto.pi.reciclemultiplique.domain.Usuario;
-import projeto.pi.reciclemultiplique.repositories.ContribuicaoRepository;
+import projeto.pi.reciclemultiplique.service.ContribuicaoService;
 
 @Controller
 @RequestMapping("/usuario")
 public class ContribuicaoUsuarioController {
 
-    private final ContribuicaoRepository contribuicaoRepository;
+    private final ContribuicaoService contribuicaoService;
 
-    public ContribuicaoUsuarioController(ContribuicaoRepository contribuicaoRepository){
-        this.contribuicaoRepository = contribuicaoRepository;
+    public ContribuicaoUsuarioController(ContribuicaoService contribuicaoService){
+        this.contribuicaoService = contribuicaoService;
     }
     
     @PostMapping("/criarContribuicao")
@@ -44,7 +44,7 @@ public class ContribuicaoUsuarioController {
         contribuicao.setDescricao(descricao);
         contribuicao.setUsuario(usuario);
 
-        this.contribuicaoRepository.save(contribuicao);
+        this.contribuicaoService.salvarContribuicao(contribuicao);
 
         redirectAttributes.addFlashAttribute("mensagem", "Contribuição realizada com sucesso");
 
@@ -57,7 +57,7 @@ public class ContribuicaoUsuarioController {
         Usuario usuario = (Usuario) session.getAttribute("user");
 
         if (usuario != null) {
-            List<Contribuicao> contribuicoes = contribuicaoRepository.findByUsuario(usuario);
+            List<Contribuicao> contribuicoes = contribuicaoService.getContribuicoesByUsuario(usuario);
         
             model.addAttribute("contribuicoes", contribuicoes);
 

@@ -13,8 +13,6 @@ import projeto.pi.reciclemultiplique.domain.Empresa;
 import projeto.pi.reciclemultiplique.domain.Endereco;
 import projeto.pi.reciclemultiplique.domain.UF;
 import projeto.pi.reciclemultiplique.domain.Usuario;
-import projeto.pi.reciclemultiplique.repositories.EmpresaRepository;
-import projeto.pi.reciclemultiplique.repositories.UsuarioRepository;
 import projeto.pi.reciclemultiplique.service.EmpresaService;
 import projeto.pi.reciclemultiplique.service.UsuarioService;
 
@@ -24,15 +22,10 @@ public class AuthController {
 	
 	private final UsuarioService usuarioService;
 	private final EmpresaService empresaService;
-	private final UsuarioRepository usuarioRepository;
-	private final EmpresaRepository empresaRepository;
 	
-    public AuthController(UsuarioService usuarioService, EmpresaService empresaService,
-                          UsuarioRepository usuarioRepository, EmpresaRepository empresaRepository) {
+    public AuthController(UsuarioService usuarioService, EmpresaService empresaService) {
 		this.usuarioService = usuarioService;
 		this.empresaService = empresaService;
-		this.usuarioRepository = usuarioRepository;
-		this.empresaRepository = empresaRepository;
 	}
 			
     @GetMapping("/registrationPage")
@@ -52,7 +45,7 @@ public class AuthController {
 						   RedirectAttributes redirectAttributes,
 						   Model model) {
 	
-		Usuario usuario = this.usuarioRepository.findByEmail(email).orElse(null);
+		Usuario usuario = this.usuarioService.getUsuarioByEmail(email).orElse(null);
 	
 		if (usuario != null && senha.matches(usuario.getSenha())){
 
@@ -111,7 +104,7 @@ public class AuthController {
 						   RedirectAttributes redirectAttributes,
 						   Model model) {
 	
-		Empresa empresa = this.empresaRepository.findByEmail(email).orElse(null);
+		Empresa empresa = this.empresaService.getEmpresaByEmail(email).orElse(null);
 	
 		if (empresa != null && senha.matches(empresa.getSenha())) {
 

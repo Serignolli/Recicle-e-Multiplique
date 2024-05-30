@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpSession;
 import projeto.pi.reciclemultiplique.domain.Empresa;
 import projeto.pi.reciclemultiplique.service.EmpresaService;
 
-
 @Controller
 @RequestMapping("/empresa/alter")
 public class AlterEmpresaController {
