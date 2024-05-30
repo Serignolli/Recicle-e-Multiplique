@@ -1,6 +1,5 @@
 package projeto.pi.reciclemultiplique.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -59,19 +58,8 @@ public class ContribuicaoUsuarioController {
 
         if (usuario != null) {
             List<Contribuicao> contribuicoes = contribuicaoRepository.findByUsuario(usuario);
-
-            List<String> nomesUsuarios = new ArrayList<>();
-            List<String> sobrenomesUsuarios = new ArrayList<>();
-        
-            for (Contribuicao contribuicao : contribuicoes) {
-                Usuario usuarioContribuicao = contribuicao.getUsuario();
-                nomesUsuarios.add(usuarioContribuicao.getNome());
-                sobrenomesUsuarios.add(usuarioContribuicao.getSobrenome());
-            }
         
             model.addAttribute("contribuicoes", contribuicoes);
-            model.addAttribute("nome", nomesUsuarios);
-            model.addAttribute("sobrenome", sobrenomesUsuarios);
 
             return "/usuario/userPage";
         } else {

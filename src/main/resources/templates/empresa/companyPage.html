@@ -24,10 +24,9 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Itera sobre a lista de contribuições -->
         <tr th:each="contribuicao : ${contribuicoes}">
-            <td th:text="${nome}"></td>
-            <td th:text="${sobrenome}"></td>
+            <td th:text="${contribuicao.usuario.nome}"></td>
+            <td th:text="${contribuicao.usuario.sobrenome}"></td>
             <td th:text="${contribuicao.produto}"></td>
             <td th:text="${contribuicao.peso}"></td>
             <td th:text="${contribuicao.descricao}"></td>
